@@ -1,11 +1,8 @@
-var host = "127.0.0.1", port = 33333;
+//var dgram = require('dgram'); Brug dette libraries til UDP-connections
+//var server = dgram.createSocket('udp4');
 
-var dgram = require( "dgram" );
+//server.on 'Hvad skal der ske når serveren begynder at lytte?'
 
-var server = dgram.createSocket( "udp4" );
+//server.on 'Hvad skal der ske når serveren modtager data? Brug her server.send() (Kig i dokumentationen)
 
-server.on( "message", function( msg, rinfo ) {
-    console.log( rinfo.address + ':' + rinfo.port + ' - ' + msg );
-    server.send( msg, 0, msg.length, rinfo.port, rinfo.address ); // added missing bracket
-});
-server.bind( port, host );
+//server.bind(PORT, HOST); Brug denne til at bind jeres socket til en specifik port og IP-adresse.
