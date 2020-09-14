@@ -1,8 +1,18 @@
-//var dgram = require('dgram'); Brug dette libraries til UDP-connections
-//var server = dgram.createSocket('udp4');
+var dgram = require('dgram');
+var server = dgram.createSocket('udp4');
+var PORT = 8080;
+var HOST = '172.17.150.255';
 
-//server.on 'Hvad skal der ske når serveren begynder at lytte?'
+server.on('listening', function () {
+    var address = server.address();
+    console.log('UDP Server listening on ' + address.address + ":" + address.port);
+});
 
-//server.on 'Hvad skal der ske når serveren modtager data? Brug her server.send() (Kig i dokumentationen)
 
-//server.bind(PORT, HOST); Brug denne til at bind jeres socket til en specifik port og IP-adresse.
+server.on('message', function (message, remote) {
+    var msg = Buffer.from("Something");
+    console.log(remote.address + ':' + remote.port +' - ' + message);
+    server.send(msg, 0, msg.length, remote.port, remote.address)
+});
+
+server.bind(PORT, HOST);
